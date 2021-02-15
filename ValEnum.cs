@@ -25,14 +25,38 @@ using UnityEngine;
 
 namespace PxPre.Datum
 {
+    /// <summary>
+    /// Information of possible values for a enum subtype.
+    /// </summary>
     public class Selections
     {
+        /// <summary>
+        /// The mapping from int values to string values.
+        /// 
+        /// The values should be synced with class member stoi, which is the inverse mapping.
+        /// </summary>
         public Dictionary<int, string> itos = new Dictionary<int, string>();
+
+        /// <summary>
+        /// The mapping from string values to int values.
+        /// 
+        /// The values should be synced with class member itos, which is the inverse mapping.
+        /// </summary>
         public Dictionary<string, int> stoi = new Dictionary<string, int>();
 
+        /// <summary>
+        /// Cached enum conversions for FromEnum<>(). That function takes C# enums and automates 
+        /// turning them into Datum Selections. The first time a new enum subtype is encountered,
+        /// it is cached in CachedFromEnum in case that enum subtype is retrived again later.
+        /// </summary>
         static Dictionary<System.Type, Selections> CachedFromEnums = 
             new Dictionary<System.Type, Selections>();
 
+        /// <summary>
+        /// Constructor. Given a list of string, set their int values to the index
+        /// they appeared in the list.
+        /// </summary>
+        /// <param name="sels">The string values for the possible values of the enum.</param>
         public Selections(string [] sels)
         { 
             for(int i = 0; i < sels.Length; ++i)
@@ -42,6 +66,10 @@ namespace PxPre.Datum
             }
         }
 
+        /// <summary>
+        /// Constructor, given an int=>string mapping.
+        /// </summary>
+        /// <param name="itos">The int=>string mapping of possible enum values.</param>
         public Selections(Dictionary<int, string> itos)
         {
             this.itos = itos;
@@ -55,6 +83,10 @@ namespace PxPre.Datum
 
         }
 
+        /// <summary>
+        /// Constructor, given a string=>int mapping.
+        /// </summary>
+        /// <param name="stoi">The string=>int mapping of possible enum values.</param>
         public Selections(Dictionary<string, int> stoi)
         {
             this.stoi = stoi;
@@ -68,6 +100,12 @@ namespace PxPre.Datum
             }
         }
 
+        /// <summary>
+        /// Template factory. Given an enum subtype, turn it into
+        /// a Selection.
+        /// </summary>
+        /// <typeparam name="k">The enum subtype.</typeparam>
+        /// <returns>The Selections that represents the enum subtype.</returns>
         public static Selections FromEnum<k>() where k: System.Enum
         {
             Selections ret;
@@ -86,6 +124,12 @@ namespace PxPre.Datum
             return ret;
         }
 
+        /// <summary>
+        /// Get the string value of a specified enum value.
+        /// </summary>
+        /// <param name="idx">The int value to retrieve the mapped string value for.</param>
+        /// <returns>The string value mapped to the int parameter value. If none is found, an
+        /// empty string is returned.</returns>
         public string GetString(int idx)
         {
             if(this.itos.TryGetValue(idx, out string v) == true)
@@ -94,6 +138,11 @@ namespace PxPre.Datum
             return idx.ToString();
         }
 
+        /// <summary>
+        /// Get the int value of a specified string enum value.
+        /// </summary>
+        /// <param name="str">The string value to retrieve the mapped int value for.</param>
+        /// <returns>An optional returning the mapped int value, or null if the value was not found.</returns>
         public int ? GetInt(string str)
         {
             if(this.stoi.TryGetValue(str, out int i) == true)
@@ -102,6 +151,10 @@ namespace PxPre.Datum
             return null;
         }
 
+        /// <summary>
+        /// Get an enumerable of all the string values of the enum.
+        /// </summary>
+        /// <returns>An enumerable of all the string values of the enum.</returns>
         public IEnumerable<string> GetNames()
         { 
             return this.stoi.Keys;
@@ -110,8 +163,14 @@ namespace PxPre.Datum
 
     public class ValEnum : Val
     {
+        /// <summary>
+        /// The raw enum value.
+        /// </summary>
         public int i;
 
+        /// <summary>
+        /// The possible values for the enum.
+        /// </summary>
         public readonly Selections selections;
 
         public override Type ty { get => Type.Enum; }

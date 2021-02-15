@@ -26,6 +26,9 @@ namespace PxPre.Datum
 {
     public class ValInt : Val
     {
+        /// <summary>
+        /// The raw int value.
+        /// </summary>
         public int i;
 
         public override Type ty { get => Type.Int; }

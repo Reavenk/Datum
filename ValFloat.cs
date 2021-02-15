@@ -26,6 +26,9 @@ namespace PxPre.Datum
 {
     public class ValFloat : Val
     {
+        /// <summary>
+        /// The raw float value.
+        /// </summary>
         public float f;
 
         public override Type ty { get => Type.Float; }

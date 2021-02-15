@@ -24,6 +24,9 @@ namespace PxPre.Datum
 {
     public class ValBool : Val
     {
+        /// <summary>
+        /// The raw bool value.
+        /// </summary>
         public bool b;
 
         public override Type ty { get => Type.Bool; }

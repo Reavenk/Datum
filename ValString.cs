@@ -24,6 +24,9 @@ namespace PxPre.Datum
 {
     public class ValString : Val
     {
+        /// <summary>
+        /// The raw string value.
+        /// </summary>
         string value = string.Empty;
 
         public override Type ty { get => Type.String; }
