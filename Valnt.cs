@@ -20,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using UnityEngine;
-
 namespace PxPre.Datum
 {
     public class ValInt : Val
@@ -109,12 +107,16 @@ namespace PxPre.Datum
 
         public override Val Min(Val v)
         { 
-            return new ValInt(Mathf.Min(this.i, v.GetInt()));
+            int o = v.GetInt();
+
+            return new ValInt(this.i < o ? this.i : o);
         }
 
         public override Val Max(Val v)
         { 
-            return new ValInt(Mathf.Max(this.i, v.GetInt()));
+            int o = v.GetInt();
+
+            return new ValInt(this.i > o ? this.i : o);
         }
     }
 }
