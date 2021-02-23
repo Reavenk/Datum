@@ -196,8 +196,18 @@ namespace PxPre.Datum
             return this.i;
         }
 
+        public override long GetInt64()
+        {
+            return (long)this.i;
+        }
+
         public override float GetFloat()
         { 
+            return this.i;
+        }
+
+        public override double GetFloat64()
+        {
             return this.i;
         }
 
@@ -213,8 +223,20 @@ namespace PxPre.Datum
             return true;
         }
 
+        public override bool SetInt64(long v)
+        {
+            this.i = (int)v;
+            return true;
+        }
+
         public override bool SetFloat(float v)
         { 
+            this.i = (int)v;
+            return true;
+        }
+
+        public override bool SetFloat64(double v)
+        {
             this.i = (int)v;
             return true;
         }

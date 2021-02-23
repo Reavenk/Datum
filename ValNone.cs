@@ -38,9 +38,19 @@ namespace PxPre.Datum
             return 0;
         }
 
+        public override long GetInt64()
+        {
+            return 0;
+        }
+
         public override float GetFloat()
         { 
             return 0.0f;
+        }
+
+        public override double GetFloat64()
+        {
+            return 0.0;
         }
 
         public override string GetString()
@@ -58,8 +68,18 @@ namespace PxPre.Datum
             return false;
         }
 
+        public override bool SetInt64(long v)
+        {
+            return false;
+        }
+
         public override bool SetFloat(float v)
         { 
+            return false;
+        }
+
+        public override bool SetFloat64(double v)
+        {
             return false;
         }
 

@@ -49,12 +49,28 @@ namespace PxPre.Datum
             return 0;
         }
 
+        public override long GetInt64()
+        {
+            if(long.TryParse(this.value, out long n) == true)
+                return n;
+
+            return 0;
+        }
+
         public override float GetFloat()
         { 
             if(float.TryParse(this.value, out float f) == true)
                 return f;
 
             return 0.0f;
+        }
+
+        public override double GetFloat64()
+        {
+            if(double.TryParse(this.value, out double d) == true)
+                return d;
+
+            return 0.0;
         }
 
         public override bool SetBool(bool v)
@@ -69,8 +85,20 @@ namespace PxPre.Datum
             return true;
         }
 
+        public override bool SetInt64(long v)
+        {
+            this.value = v.ToString();
+            return true;
+        }
+
         public override bool SetFloat(float v)
         { 
+            this.value = v.ToString();
+            return true;
+        }
+
+        public override bool SetFloat64(double v)
+        {
             this.value = v.ToString();
             return true;
         }

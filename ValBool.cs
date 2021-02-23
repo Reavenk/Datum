@@ -46,9 +46,19 @@ namespace PxPre.Datum
             return this.b ? 1 : 0;
         }
 
+        public override long GetInt64()
+        { 
+            return this.b ? 1 : 0;
+        }
+
         public override float GetFloat()
         { 
             return this.b ? 1.0f : 0.0f;
+        }
+
+        public override double GetFloat64()
+        {
+            return this.b ? 1.0 : 0.0;
         }
 
         public override bool SetBool(bool v)
@@ -63,9 +73,21 @@ namespace PxPre.Datum
             return true;
         }
 
+        public override bool SetInt64(long v)
+        {
+            this.b = (v != 0);
+            return true;
+        }
+
         public override bool SetFloat(float v)
         { 
             this.b = v != 0.0f;
+            return true;
+        }
+
+        public override bool SetFloat64(double v)
+        {
+            this.b = v != 0.0;
             return true;
         }
 

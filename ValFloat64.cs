@@ -20,123 +20,125 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System.Collections;
+using System.Collections.Generic;
+
 namespace PxPre.Datum
 {
-    public class ValFloat : Val
+    public class ValFloat64 : Val
     {
-        /// <summary>
-        /// The raw float value.
-        /// </summary>
-        public float f;
+        public double d;
 
-        public override Type ty { get => Type.Float; }
+        public override Type ty { get => Type.Float64; }
 
-        public ValFloat(float f)
-        { 
-            this.f = f;
+        public ValFloat64(double d)
+        {
+            this.d = d;
         }
 
         public override bool GetBool()
-        { 
-            return this.f != 0.0f;
+        {
+            return this.d != 0;
         }
 
         public override int GetInt()
-        { 
-            return (int)this.f;
+        {
+            return (int)this.d;
         }
 
         public override long GetInt64()
         {
-            return (long)this.f;
+            return (long)this.d;
         }
 
         public override float GetFloat()
-        { 
-            return this.f;
+        {
+            return (float)this.d;
         }
 
         public override double GetFloat64()
         {
-            return this.f;
+            return this.d;
         }
 
         public override bool SetBool(bool v)
-        { 
-            this.f = v ? 1.0f : 0.0f;
+        {
+            this.d = v ? 1.0 : 0.0;
             return true;
         }
 
         public override bool SetInt(int v)
-        { 
-            this.f = v;
+        {
+            this.d = v;
             return true;
         }
 
         public override bool SetInt64(long v)
         {
-            this.f = (float)v;
+            this.d = v;
             return true;
         }
 
         public override bool SetFloat(float v)
-        { 
-            this.f = v;
+        {
+            this.d = v;
             return true;
         }
 
         public override bool SetFloat64(double v)
         {
-            this.f = (float)v;
+            this.d = d;
             return true;
         }
 
         public override string GetString()
-        { 
-            return f.ToString();
+        {
+            return this.d.ToString();
         }
 
         public override bool SetString(string v)
-        { 
-            float fp;
-            if(float.TryParse(v, out fp) == false)
+        {
+            double dp;
+            if (double.TryParse(v, out dp) == false)
                 return false;
 
-            this.f = fp;
+            this.d = dp;
             return true;
         }
 
         public override Val Clone()
         {
-            return new ValFloat(this.f);
+            return new ValFloat64(this.d);
         }
 
         public override bool SetValue(Val v)
         {
-            this.f = v.GetFloat();
+            this.d = v.GetInt64();
             return true;
         }
 
         public override Val Add(Val v)
         {
-            return new ValFloat(this.f + v.GetFloat());
+            return new ValFloat64(this.d + v.GetFloat64());
         }
 
         public override Val Mul(Val v)
         {
-            return new ValFloat(this.f * v.GetFloat());
+            return new ValFloat64(this.d * v.GetFloat64());
         }
 
         public override Val Min(Val v)
         {
-            float o = v.GetFloat();
-            return new ValFloat(this.f < o ? this.f : o);
+            double o = v.GetFloat64();
+
+            return new ValFloat64(this.d < o ? this.d : o);
         }
 
         public override Val Max(Val v)
         {
-            float o = v.GetFloat();
-            return new ValFloat(this.f > o ? this.f : o);
+            long o = v.GetInt64();
+
+            return new ValFloat64(this.d > o ? this.d : o);
         }
     }
 }

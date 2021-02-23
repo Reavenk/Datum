@@ -59,6 +59,18 @@ namespace PxPre.Datum
             Float,
 
             /// <summary>
+            /// The datatype is a 64 bit int. GetInt64() and SetInt64() should be used
+            /// to access its values.
+            /// </summary>
+            Int64,
+
+            /// <summary>
+            /// The datatype is a double precision float. GetFloat64 and SetFloat64() should be used
+            /// to access it values.
+            /// </summary>
+            Float64,
+
+            /// <summary>
             /// The datatype is a string. GetString() and SetString() should be used
             /// to access its values.
             /// </summary>
@@ -91,11 +103,25 @@ namespace PxPre.Datum
         public abstract int GetInt();
 
         /// <summary>
+        /// Get long int value. It's either a long value from
+        /// a Int64 Val, or the object's value converted to an long.
+        /// </summary>
+        /// <returns>The long value of the object.</returns>
+        public abstract long GetInt64();
+
+        /// <summary>
         /// Get the float value. It's either a float value from
         /// a float Val, or the object's value converted to a float.
         /// </summary>
         /// <returns>The float value of the object.</returns>
         public abstract float GetFloat();
+
+        /// <summary>
+        /// Get the double value. It's either a double value from
+        /// a Float64 Val, or the object's value converted to a double.
+        /// </summary>
+        /// <returns>The float value of the object.</returns>
+        public abstract double GetFloat64();
 
         /// <summary>
         /// Get the string value. It's either a string value from
@@ -121,12 +147,28 @@ namespace PxPre.Datum
         public abstract bool SetInt(int v);
 
         /// <summary>
+        /// Set the long value of the object - or the equivalent of the
+        /// specified long value converted to its native datatype.
+        /// </summary>
+        /// <param name="v">The long value to set the object to.</param>
+        /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
+        public abstract bool SetInt64(long v);
+
+        /// <summary>
         /// Set the float value of the object - or the equivalent of the
         /// specified float value converted to its native datatype.
         /// </summary>
         /// <param name="v">The float value to set the object to.</param>
         /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
         public abstract bool SetFloat(float v);
+
+        /// <summary>
+        /// Set the double value of the object - or the equivalent of the
+        /// specified double value converted to its native datatype.
+        /// </summary>
+        /// <param name="v">The double value to set the object to.</param>
+        /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
+        public abstract bool SetFloat64(double v);
 
         /// <summary>
         /// Set the string value of the object - or the equivalent of the
