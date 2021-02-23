@@ -78,7 +78,7 @@ namespace PxPre.Datum
         { 
             int ip;
             if(int.TryParse(v, out ip) == false)
-                this.i = ip;
+                return false;
 
             this.i = ip;
             return true;
