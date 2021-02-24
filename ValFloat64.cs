@@ -87,7 +87,7 @@ namespace PxPre.Datum
 
         public override bool SetFloat64(double v)
         {
-            this.d = d;
+            this.d = v;
             return true;
         }
 
