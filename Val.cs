@@ -258,5 +258,67 @@ namespace PxPre.Datum
         /// could not be found. It is unspecified if the return will be a None object or null,
         /// and depends on the implementation of the invoking object.</returns>
         public virtual Val GetIndex(Val i){ return null; }
+
+        /// <summary>
+        /// Utility function to make a ValInt using an overloaded function name Make().
+        /// </summary>
+        /// <param name="i">The ValInt value.</param>
+        /// <returns>A ValInt with the parameter value.</returns>
+        public static Val Make(int i)
+        { 
+            return new ValInt(i);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValFloat using an overloaded function name Make().
+        /// </summary>
+        /// <param name="f">The ValFloat value.</param>
+        /// <returns>A ValFloat with the parameter value.</returns>
+        public static Val Make(float f)
+        { 
+            return new ValFloat(f);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValInt64 using an overloaded function name Make().
+        /// </summary>
+        /// <param name="l">The ValInt64 value.</param>
+        /// <returns>A ValInt64 with the parameter value.</returns>
+        public static Val Make(long l)
+        {
+            return new ValInt64(l);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValFloat64 using an overloaded function name Make().
+        /// </summary>
+        /// <param name="d">The ValFloat64 value.</param>
+        /// <returns>A ValFloat64 with the parameter value.</returns>
+        public static Val Make(double d)
+        { 
+            return new ValFloat64(d);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValBool using an overloaded function name Make().
+        /// </summary>
+        /// <param name="b">The ValBool value.</param>
+        /// <returns>A ValBool with the parameter value.</returns>
+        public static Val Make(bool b)
+        { 
+            return new ValBool(b);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValString using an overloaded function name Make().
+        /// </summary>
+        /// <param name="s">The ValString value.</param>
+        /// <returns>A ValString with the parameter value.</returns>
+        public static Val Make(string s)
+        {
+            return new ValString(s);
+        }
+
+
     }
 }
