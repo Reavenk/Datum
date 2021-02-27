@@ -53,6 +53,12 @@ namespace PxPre.Datum
             Int,
 
             /// <summary>
+            /// The datatype is an unsigned int. GetUInt() and SetUInt() should be used
+            /// to access its values.
+            /// </summary>
+            UInt,
+
+            /// <summary>
             /// The datatype is a float. GetFloat() and SetFloat() should be used
             /// to access its values.
             /// </summary>
@@ -63,6 +69,12 @@ namespace PxPre.Datum
             /// to access its values.
             /// </summary>
             Int64,
+
+            /// <summary>
+            /// The datatype is a 64 bit usngiend int. GetUInt64() and SetUInt64() should be used
+            /// to access its values.
+            /// </summary>
+            UInt64,
 
             /// <summary>
             /// The datatype is a double precision float. GetFloat64 and SetFloat64() should be used
@@ -103,11 +115,25 @@ namespace PxPre.Datum
         public abstract int GetInt();
 
         /// <summary>
+        /// Get the unsigned int value. It's either an unsigned int value from
+        /// an int Val, or the object's value converted to an unsigned int.
+        /// </summary>
+        /// <returns>The int value of the object.</returns>
+        public abstract uint GetUInt();
+
+        /// <summary>
         /// Get long int value. It's either a long value from
         /// a Int64 Val, or the object's value converted to an long.
         /// </summary>
         /// <returns>The long value of the object.</returns>
         public abstract long GetInt64();
+
+        /// <summary>
+        /// Get unsigned long value. It's either an unsigned long value from
+        /// a UInt64 Val, or the object's value converted to an unsigned long.
+        /// </summary>
+        /// <returns>The long value of the object.</returns>
+        public abstract ulong GetUInt64();
 
         /// <summary>
         /// Get the float value. It's either a float value from
@@ -147,12 +173,28 @@ namespace PxPre.Datum
         public abstract bool SetInt(int v);
 
         /// <summary>
+        /// Set the unsigned int value of the object - or the equivalent of the
+        /// specified int value converted to its native datatype.
+        /// </summary>
+        /// <param name="v">The unsigned int value to set the object to.</param>
+        /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
+        public abstract bool SetUInt(uint v);
+
+        /// <summary>
         /// Set the long value of the object - or the equivalent of the
         /// specified long value converted to its native datatype.
         /// </summary>
         /// <param name="v">The long value to set the object to.</param>
         /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
         public abstract bool SetInt64(long v);
+
+        /// <summary>
+        /// Set the unsigned long value of the object - or the equivalent of the
+        /// specified unsigned long value converted to its native datatype.
+        /// </summary>
+        /// <param name="v">The unsigned long value to set the object to.</param>
+        /// <returns>True if the value, or an equivalent value was successfully set. Else, false</returns>
+        public abstract bool SetUInt64(ulong v);
 
         /// <summary>
         /// Set the float value of the object - or the equivalent of the
@@ -270,6 +312,16 @@ namespace PxPre.Datum
         }
 
         /// <summary>
+        /// Utility function to make a ValUInt using an overloaded function name Make().
+        /// </summary>
+        /// <param name="i">The ValUInt value.</param>
+        /// <returns>A ValUInt with the parameter value.</returns>
+        public static Val Make(uint i)
+        { 
+            return new ValUInt(i);
+        }
+
+        /// <summary>
         /// Utility function to make a ValFloat using an overloaded function name Make().
         /// </summary>
         /// <param name="f">The ValFloat value.</param>
@@ -287,6 +339,16 @@ namespace PxPre.Datum
         public static Val Make(long l)
         {
             return new ValInt64(l);
+        }
+
+        /// <summary>
+        /// Utility function to make a ValUInt64 using an overloaded function name Make().
+        /// </summary>
+        /// <param name="l">The ValUInt64 value.</param>
+        /// <returns>A ValUInt64 with the parameter value.</returns>
+        public static Val Make(ulong l)
+        {
+            return new ValUInt64(l);
         }
 
         /// <summary>

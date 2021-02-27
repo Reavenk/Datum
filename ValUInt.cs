@@ -22,143 +22,145 @@
 
 namespace PxPre.Datum
 {
-    public class ValFloat : Val
+    public class ValUInt : Val
     {
         /// <summary>
-        /// The raw float value.
+        /// The raw unsigned int value.
         /// </summary>
-        public float f;
+        public uint i;
 
-        public override Type ty { get => Type.Float; }
+        public override Type ty { get => Type.Int; }
 
-        public ValFloat(float f)
-        { 
-            this.f = f;
+        public ValUInt(uint i)
+        {
+            this.i = i;
         }
 
         public override bool GetBool()
-        { 
-            return this.f != 0.0f;
+        {
+            return this.i != 0;
         }
 
         public override int GetInt()
-        { 
-            return (int)this.f;
+        {
+            return (int)this.i;
         }
 
         public override uint GetUInt()
         {
-            return (uint)this.f;
+            return (uint)this.i;
         }
 
         public override long GetInt64()
         {
-            return (long)this.f;
+            return this.i;
         }
 
         public override ulong GetUInt64()
         {
-            return (ulong)this.f;
+            return (ulong)this.i;
         }
 
         public override float GetFloat()
-        { 
-            return this.f;
+        {
+            return (float)this.i;
         }
 
         public override double GetFloat64()
         {
-            return this.f;
+            return (double)this.i;
         }
 
         public override bool SetBool(bool v)
-        { 
-            this.f = v ? 1.0f : 0.0f;
+        {
+            this.i = (uint)(v ? 1 : 0);
             return true;
         }
 
         public override bool SetInt(int v)
-        { 
-            this.f = v;
+        {
+            this.i = (uint)v;
             return true;
         }
 
         public override bool SetUInt(uint v)
         {
-            this.f = v;
+            this.i = v;
             return true;
         }
 
         public override bool SetInt64(long v)
         {
-            this.f = (float)v;
+            this.i = (uint)v;
             return true;
         }
 
         public override bool SetUInt64(ulong v)
         {
-            this.f = (float)v;
+            this.i = (uint)v;
             return true;
         }
 
         public override bool SetFloat(float v)
-        { 
-            this.f = v;
+        {
+            this.i = (uint)v;
             return true;
         }
 
         public override bool SetFloat64(double v)
         {
-            this.f = (float)v;
+            this.i = (uint)v;
             return true;
         }
 
         public override string GetString()
-        { 
-            return f.ToString();
+        {
+            return this.i.ToString();
         }
 
         public override bool SetString(string v)
-        { 
-            float fp;
-            if(float.TryParse(v, out fp) == false)
+        {
+            uint ip;
+            if (uint.TryParse(v, out ip) == false)
                 return false;
 
-            this.f = fp;
+            this.i = ip;
             return true;
         }
 
         public override Val Clone()
         {
-            return new ValFloat(this.f);
+            return new ValUInt(this.i);
         }
 
         public override bool SetValue(Val v)
         {
-            this.f = v.GetFloat();
+            this.i = v.GetUInt();
             return true;
         }
 
         public override Val Add(Val v)
         {
-            return new ValFloat(this.f + v.GetFloat());
+            return new ValUInt(this.i + v.GetUInt());
         }
 
         public override Val Mul(Val v)
         {
-            return new ValFloat(this.f * v.GetFloat());
+            return new ValUInt(this.i * v.GetUInt());
         }
 
         public override Val Min(Val v)
         {
-            float o = v.GetFloat();
-            return new ValFloat(this.f < o ? this.f : o);
+            uint o = v.GetUInt();
+
+            return new ValUInt(this.i < o ? this.i : o);
         }
 
         public override Val Max(Val v)
         {
-            float o = v.GetFloat();
-            return new ValFloat(this.f > o ? this.f : o);
+            uint o = v.GetUInt();
+
+            return new ValUInt(this.i > o ? this.i : o);
         }
     }
 }

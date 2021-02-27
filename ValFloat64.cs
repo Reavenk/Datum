@@ -46,9 +46,19 @@ namespace PxPre.Datum
             return (int)this.d;
         }
 
+        public override uint GetUInt()
+        {
+            return (uint)this.d;
+        }
+
         public override long GetInt64()
         {
             return (long)this.d;
+        }
+
+        public override ulong GetUInt64()
+        {
+            return (ulong)this.d;
         }
 
         public override float GetFloat()
@@ -73,7 +83,19 @@ namespace PxPre.Datum
             return true;
         }
 
+        public override bool SetUInt(uint v)
+        {
+            this.d = v;
+            return true;
+        }
+
         public override bool SetInt64(long v)
+        {
+            this.d = v;
+            return true;
+        }
+
+        public override bool SetUInt64(ulong v)
         {
             this.d = v;
             return true;

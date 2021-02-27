@@ -38,7 +38,17 @@ namespace PxPre.Datum
             return 0;
         }
 
+        public override uint GetUInt()
+        {
+            return 0;
+        }
+
         public override long GetInt64()
+        {
+            return 0;
+        }
+
+        public override ulong GetUInt64()
         {
             return 0;
         }
@@ -68,7 +78,17 @@ namespace PxPre.Datum
             return false;
         }
 
+        public override bool SetUInt(uint v)
+        {
+            return false;
+        }
+
         public override bool SetInt64(long v)
+        {
+            return false;
+        }
+
+        public override bool SetUInt64(ulong v)
         {
             return false;
         }

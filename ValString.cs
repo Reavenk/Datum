@@ -49,9 +49,25 @@ namespace PxPre.Datum
             return 0;
         }
 
+        public override uint GetUInt()
+        {
+            if (uint.TryParse(this.value, out uint n) == true)
+                return n;
+
+            return 0;
+        }
+
         public override long GetInt64()
         {
             if(long.TryParse(this.value, out long n) == true)
+                return n;
+
+            return 0;
+        }
+
+        public override ulong GetUInt64()
+        {
+            if (ulong.TryParse(this.value, out ulong n) == true)
                 return n;
 
             return 0;
@@ -85,7 +101,19 @@ namespace PxPre.Datum
             return true;
         }
 
+        public override bool SetUInt(uint v)
+        {
+            this.value = v.ToString();
+            return true;
+        }
+
         public override bool SetInt64(long v)
+        {
+            this.value = v.ToString();
+            return true;
+        }
+
+        public override bool SetUInt64(ulong v)
         {
             this.value = v.ToString();
             return true;
