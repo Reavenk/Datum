@@ -160,5 +160,14 @@ namespace PxPre.Datum
             float o = v.GetFloat();
             return new ValFloat(this.f > o ? this.f : o);
         }
+
+        public override bool SetIndex(int idx, Val v) => false;
+        public override bool SetIndex(string idx, Val v) => false;
+        public override bool SetIndex(Val idx, Val v) => false;
+
+        public override bool Equivalent(Val v)
+        {
+            return this.f == v.GetFloat();
+        }
     }
 }

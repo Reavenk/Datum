@@ -86,9 +86,63 @@ namespace PxPre.Datum
             /// The datatype is a string. GetString() and SetString() should be used
             /// to access its values.
             /// </summary>
-            String
+            String,
+
+            Array,
+
+            StringMap,
+
+            ObjectMap,
+
+            Executable,
+
+            Context,
+
+            Custom,
+
+            Scope,
+
+            Relay
         }
 
+        /// <summary>
+        /// When a Val is evaluated, where did the result come from?
+        /// </summary>
+        public enum EvalTy
+        { 
+            /// <summary>
+            /// The Val sent itself back
+            /// </summary>
+            Relay,
+
+            /// <summary>
+            /// The Val came from a return statement
+            /// </summary>
+            Return,
+
+            /// <summary>
+            /// The Val came from a yield statement
+            /// </summary>
+            Yield,
+
+            /// <summary>
+            /// The Val performed a misc transformation (all others that don't fit
+            /// into any other EvalTy value).
+            /// </summary>
+            Transform,
+
+            /// <summary>
+            /// The Val came from a continue statement
+            /// </summary>
+            Continue,
+
+            /// <summary>
+            /// The Val came from a break statement
+            /// </summary>
+            Break
+        }
+
+        public IPrototype prototype = null;
 
         public abstract Type ty {get; }
 
@@ -233,6 +287,14 @@ namespace PxPre.Datum
         /// <returns></returns>
         public abstract bool SetValue(Val v);
 
+        public abstract bool SetIndex(int idx, Val v);
+
+        public abstract bool SetIndex(string idx, Val v);
+
+        public abstract bool SetIndex(Val idx, Val v);
+
+        public virtual ValArray GetIndices(){ return new ValArray(); }
+
         /// <summary>
         /// Get the value of two Vals added.
         /// </summary>
@@ -300,6 +362,31 @@ namespace PxPre.Datum
         /// could not be found. It is unspecified if the return will be a None object or null,
         /// and depends on the implementation of the invoking object.</returns>
         public virtual Val GetIndex(Val i){ return null; }
+
+        public virtual Val GetIndex(string idx)
+        {
+            if(prototype != null)
+                return prototype.GetPrototypeMember(this, idx);
+            
+            return null;
+        }
+
+        public virtual Val Execute(Ctx ctx, out EvalTy evalTy) { evalTy = EvalTy.Relay; return this; }
+
+        public virtual bool Equals(Val v)
+        { 
+            if(this == v)
+                return true;
+
+            if(this.ty != v.ty)
+                return false;
+
+            return this.Equivalent(v);
+        }
+
+        public abstract bool Equivalent(Val v);
+
+        public virtual bool AppendInstruction(Val v) => false;
 
         /// <summary>
         /// Utility function to make a ValInt using an overloaded function name Make().
@@ -380,7 +467,5 @@ namespace PxPre.Datum
         {
             return new ValString(s);
         }
-
-
     }
 }

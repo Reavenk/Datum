@@ -137,5 +137,19 @@ namespace PxPre.Datum
         { 
             return this;
         }
+
+        public override bool SetIndex(int idx, Val v) => false;
+        public override bool SetIndex(string idx, Val v) => false;
+        public override bool SetIndex(Val idx, Val v) => false;
+
+        public override bool Equals(Val v)
+        {
+            return v.ty == Type.None;
+        }
+
+        public override bool Equivalent(Val v)
+        {
+            return v.ty == Type.None;
+        }
     }
 }
